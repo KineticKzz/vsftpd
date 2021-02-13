@@ -45,7 +45,23 @@
 
 - Acceso al servidor FTP: anónimo tiene solo permiso de lectura en su dir
 
+    Abrimos /etc/vsftpd.conf y configuramos las siguientes directivas:
+    
+      anonymous_enable=YES
+      
+    Nos intentamos conectar con filezilla con el usuario anonymous y sin contraseña, podremos ver el contenido pero no crearlo
+    
+    ![img](https://i.imgur.com/GYS7MX9.png)
+
 - Acceso al servidor FTP: anónimo tiene permiso de escritura en el directorio sugerencias, que es un subdirectorio de su directorio raíz.
+
+    En /etc/vsftpd.conf configuramos las siguientes directivas:
+    
+      anon_mkdir_write_enable=YES
+      
+      anon_root=/srv/sugerencias
+      
+    Y ya podremos crear archivos en ese directorio.
 
 - Acceso al servidor FTP: Creación de usuarios virtuales.
 
