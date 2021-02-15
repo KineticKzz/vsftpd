@@ -65,4 +65,28 @@
 
 - Acceso al servidor FTP: Creación de usuarios virtuales.
 
+  Configuramos las siguientes directivas
+ 
+        user_config_dir=/etc/vsftpd/usersConf
+        guest_enable=YES
+        virtual_use_local_privs=YES
+        
+        mkdir /etc/vsftpd
+        cd /etc/vsftpd/
+        
+        htpasswd -cd ftpd.passwd virtual1
+        htpasswd -d ftpd.passwd virtual2
+        
+        apt install libpam-pwdfilev
+        cp /etc/pam.d/vsftpd /etc/pam.d/vsftpd.ORIGINAL
+        echo "auth required pam_pwdfile.so pwdfile /etc/vsftpd/ftpd.passwd" > /etc/pam.d/vsftpd
+        echo "account required pam_permit.so" >> /etc/pam.d/vsftpd
+
+        mkdir /etc/vsftpd/usersConf
+        
+        echo "local_root=/srv/virtual1" > /etc/vsftpd/usersConf/virtual1
+        echo "local_root=/srv/virtual2" > /etc/vsftpd/usersConf/virtual2
+        
+        chown -R ftp:nogroup /srv
+
 - Acceso seguro al servidor FTP
