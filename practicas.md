@@ -71,6 +71,8 @@
         guest_enable=YES
         virtual_use_local_privs=YES
         
+  Y realizamos los siguientes pasos:
+  
         mkdir /etc/vsftpd
         cd /etc/vsftpd/
         
