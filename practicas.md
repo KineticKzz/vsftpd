@@ -90,5 +90,20 @@
         echo "local_root=/srv/virtual2" > /etc/vsftpd/usersConf/virtual2
         
         chown -R ftp:nogroup /srv
+        
+     Abrimos filezilla y entramos como virtual1 y virtual2
 
 - Acceso seguro al servidor FTP
+
+     Cambiamos la directiva de ssl que quede en Yes
+     
+        ssl_enable=YES
+        
+     Procedemos a instalar el certificado
+     
+        apt install openssl -y
+        
+        cd /etc/ssl/private/
+        openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout vsftpd.pem -out vsftpd.pem
+        
+     Ahora nos conectamos y nos da el aviso de que no reconoce el certificado. Pero eso sale porque no nos reconoce como empresa fiable ya que lo hemos firmado nosotros mismos.
