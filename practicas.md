@@ -81,7 +81,8 @@
         
         apt install libpam-pwdfilev
         cp /etc/pam.d/vsftpd /etc/pam.d/vsftpd.ORIGINAL
-        echo "auth required pam_pwdfile.so pwdfile /etc/vsftpd/ftpd.passwd" > /etc/pam.d/vsftpd
+        echo "auth sufficient pam_pwdfile.so pwdfile /etc/vsftpd/ftpd.passwd" > /etc/pam.d/vsftpd
+        echo "auth required pam_shells.so" >> /etc/pam.d/vsftpd
         echo "account required pam_permit.so" >> /etc/pam.d/vsftpd
 
         mkdir /etc/vsftpd/usersConf
